@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>{{ title }}</title>
+
+	<style type="text/css">
+	.question
+	{
+		margin: 10 px;
+		font-family: sans-serif;
+		font-size: 11pt;
+
+	}
+	.header
+	{
+		text-align: center;
+		margin: 0 auto;
+	}
+	</style>
+</head>
+<body>
+	<div class="header">
+		<h1>{{ title }}</h1>
+	</div>
+	{% if correct_answers %}	
+		<div>
+			<h2>Correct answers</h2>
+			{% for k,q in correct_answers.items() %}
+			<hr />
+			<div class="question">
+				<p><strong>Question: </strong>{{ q.question_number }} - {{ q.question }}</p>
+				<p><strong>Possible answers: </strong>
+					<ul>
+						{% for answer in q.possible_answers.split('|') %}
+							<li>{{ answer }}</li>
+						{% endfor %}
+					</ul>
+				</p>
+				{% if q.type_of_quiz == 'Multiple True/False (Type X)'  %}
+					<p><strong>Your answer is: </strong> {{ k }} </p>
+				{% endif %}
+				<p><strong>Correct answer is: </strong> {{ q.correct_answer}} </p>
+				<p><strong>Explanation: </strong> {{ q.explanation }} </p>
+			</div>
+			{% endfor %}
+		</div>
+	{% endif %}
+	{% if wrong_answers %}
+		<div>
+			<h2>Wrong answers</h2>
+			{% for k,q in wrong_answers.items() %}
+			<hr />
+			<div class="question">
+				<p><strong>Question: </strong>{{ q.question_number }} - {{ q.question }}</p>
+				<p><strong>Possible answers: </strong>
+					<ul>
+						{% for answer in q.possible_answers.split('|') %}
+							<li>{{ answer }}</li>
+						{% endfor %}
+					</ul>
+				</p>
+				<p><strong>Your answer is: </strong> {{ k }} </p>
+				<p><strong>Correct answer is: </strong> {{ q.correct_answer}} </p>
+				<p><strong>Explanation: </strong> {{ q.explanation }} </p>
+			</div>
+			{% endfor %}
+		</div>
+	{% endif %}
+
+</body>
+</html>

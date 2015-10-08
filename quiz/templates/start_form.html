@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>MCQ Practice Bank</title>
+</head>
+<body>
+	<form action="/" method="POST" style="margin:100px auto; width:400px;text-align: center;">
+		<h2 style="text-align: center;">Choose the test</h2>
+		<p>
+			<label for="section"> Select section </label>
+			<select name="section" required>
+				<option value="0">Anatomy MCQs</option>
+				<option value="1">Pathology MCQs</option>
+				<option value="2">Physiology MCQs</option>
+				<option value="3">Other MCQs</option>
+			</select>
+		</p>
+		<p>
+			<label for="category"> Select category </label>
+			<select name="category" required>
+				<option value="0">Multiple Choice (Type A)</option>
+				<option value="1">Multiple True/False (Type X)</option>
+				<option value="2">Relationship-Analysis (Type B)</option>
+			</select>
+		</p>
+		<input type="submit" value="Start" />
+	</form>
+
+</body>
+</html>

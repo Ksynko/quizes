@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>{{ title }}</title>
+
+	<style type="text/css">
+	.question
+	{
+		margin: 10 px;
+		font-family: sans-serif;
+		font-size: 11pt;
+
+	}
+	.header
+	{
+		text-align: center;
+		margin: 0 auto;
+	}
+	</style>
+</head>
+<body>
+	<div class="header">
+		<h2>{{ title }}</h2>
+	</div>	
+	<form action="/check" method="POST">
+	{% for q in questions %}
+	<hr />
+	<div class="question">
+		<p><strong>Question: </strong>{{ q.question_number }} - {{ q.question }}</p>
+		<p><strong>Possible answers: </strong></p>
+		{% for answer in q.possible_answers.split('|')%}
+			{% if q.type_of_quiz == 'Multiple True/False (Type X)' %}
+				<input type="checkbox" name="{{ q.question_number }}" value="{{ answer.split('.')[1] }}" /> {{ answer}}<br/>
+			{% else %}
+				<input type="radio" name="{{ q.question_number }}" value="{{ answer.split('.')[1] }}" required /> {{ answer}}<br/>
+			{% endif %}
+		{% endfor %}
+	</div>
+	{% endfor %}
+	<hr />
+	<input type="hidden" name="category" value="{{ questions[0].type_of_quiz }}">
+	<input type="submit" value="Check" />
+	</form>
+</body>
+</html>
